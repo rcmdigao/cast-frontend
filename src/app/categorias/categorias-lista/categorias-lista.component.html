@@ -1,0 +1,59 @@
+<div class="card-header" style="margin-top: 25px;">
+  <i class="fa fa-table mr-1" style="margin-top: 13px;"></i> Categoria 
+  <button (click)="novoCadastro()" class="btn btn-primary float-right">
+    <i class="fa fa-plus mr-1"></i> Nova Categoria
+  </button>
+</div>
+<div class="row" style="margin-top: 5px;">
+  <div class="col-md-12">
+    <div class="alert alert-success" role="alert" *ngIf="msgSucesso">
+      <strong>{{ msgSucesso }}</strong>
+    </div>          
+    <div class="alert alert-danger" role="alert" *ngFor="msgErro">
+      <strong>{{msgErro}}</strong>
+    </div>   
+  </div>  
+</div>
+
+<div class="card-body">
+  <div class="table-responsive">
+      <table id="vara" class="display w-100 table table-condensed table-hover">
+          <thead>
+              <tr>
+                  <th style="width: 5%;">#ID</th>
+                  <th style="width: 90%;">NOME</th>                  
+                  <th style="width: 5%;" colspan="2">AÇÕES</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let cat of categoria">
+                  <td class="text-left">{{ cat.id }}</td>
+                  <td class="text-left">{{ cat.descricao }}</td>
+                  <td class="text-center">
+                      <button class="btn btn-primary" routerLink="/categorias-form/{{ cat.id }}"><i class="fas fa-edit" style="color: #fff;"></i></button>
+                  </td>
+                  <td class="text-center">
+                    <button (click)="preparaDelecao(cat)" class="btn btn-danger" data-toggle="modal" data-target="#modalDelecao"><i class="fa fa-trash" style="color: #fff;"></i></button></td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+
+<div id="modalDelecao" class="modal fade" role="dialog">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header"><h4>Confirmação</h4></div>
+    <div class="modal-body" *ngIf="categoriaSelecionada">
+      Confirma a exclusão da Categoria:
+      {{ categoriaSelecionada.descricao }}
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-success" (click)="deletarCategoria()" data-dismiss="modal">Confirma</button>
+      <button class="btn btn-danger" data-dismiss="modal">Cancela</button>
+    </div>
+  </div>
+</div>
+</div>
+
+
+</div>
